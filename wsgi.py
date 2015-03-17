@@ -1,4 +1,4 @@
-from utils import parse_http_post_data, take_one_or_None
+from utils import parse_http_post_data, take_one_or_None, parse_http_get_data
 
 
 data_messages = [
@@ -10,6 +10,7 @@ data_messages = [
 def application(environ, start_response):
     REQUEST_METHOD = environ['REQUEST_METHOD']
     POST = parse_http_post_data(environ)
+    GET = parse_http_get_data(environ)
 
     status = '200 OK'
     headers = [('Content-type', 'text/html; charset=utf-8')]

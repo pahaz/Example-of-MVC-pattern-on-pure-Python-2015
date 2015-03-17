@@ -1,6 +1,10 @@
 from urllib.parse import parse_qs
 
 
+def parse_http_get_data(environ):
+    return parse_qs(environ["QUERY_STRING"])
+
+
 def parse_http_post_data(environ):
     """
     Parse a HTTP post data form WSGI `environ` argument.
