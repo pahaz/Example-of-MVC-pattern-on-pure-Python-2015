@@ -31,4 +31,3 @@ def take_one_or_None(dict_, key):
     if type(val) in (list, tuple) and len(val) > 0:
         val = val[0]
     return val
-
