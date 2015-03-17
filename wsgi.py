@@ -29,4 +29,4 @@ def application(environ, start_response):
     template_bytes = template_bytes.replace(b'{{messages}}', messages)
 
     start_response(status, headers)
-    return [template_bytes, b'<hr>']
+    return [template_bytes]
