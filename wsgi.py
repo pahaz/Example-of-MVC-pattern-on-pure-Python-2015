@@ -11,6 +11,9 @@ def application(environ, start_response):
     REQUEST_METHOD = environ['REQUEST_METHOD']
     POST = parse_http_post_data(environ)
     GET = parse_http_get_data(environ)
+    # print(REQUEST_METHOD)
+    # print(GET)
+    # print(POST)
 
     status = '200 OK'
     headers = [('Content-type', 'text/html; charset=utf-8')]
