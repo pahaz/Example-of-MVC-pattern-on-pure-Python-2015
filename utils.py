@@ -2,7 +2,7 @@ from urllib.parse import parse_qs
 
 
 def parse_http_get_data(environ):
-    return parse_qs(environ["QUERY_STRING"])
+    return parse_qs(environ.get("QUERY_STRING", ""))
 
 
 def parse_http_post_data(environ):
