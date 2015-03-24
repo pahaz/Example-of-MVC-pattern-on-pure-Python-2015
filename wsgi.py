@@ -1,10 +1,11 @@
 import wsgiref.validate
+
 from conteroller import index
 from router import Router
-
 from utils import parse_http_x_www_form_urlencoded_post_data, \
-    get_first_element, parse_http_get_data, parse_http_headers, \
+    parse_http_get_data, parse_http_headers, \
     parse_http_content_type, parse_http_uri
+
 
 DEBUG = True
 STATIC_URL = '/static/'

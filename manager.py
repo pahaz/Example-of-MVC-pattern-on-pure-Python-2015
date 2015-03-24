@@ -1,6 +1,8 @@
 from __future__ import unicode_literals, print_function, generators, division
 import shelve
+
 from model import Message
+
 
 __author__ = 'pahaz'
 
