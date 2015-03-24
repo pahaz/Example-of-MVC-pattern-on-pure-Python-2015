@@ -16,7 +16,7 @@ class Router:
             return callback
         return self.default_route
 
-    def default_route(self, get, post):
+    def default_route(self, *args, **kwargs):
         status = '404 Not Found'
         body = b''
         return status, body

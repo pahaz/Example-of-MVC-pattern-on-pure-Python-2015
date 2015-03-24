@@ -1,4 +1,6 @@
 import wsgiref.validate
+from conteroller import index
+from router import Router
 
 from utils import parse_http_x_www_form_urlencoded_post_data, \
     get_first_element, parse_http_get_data, parse_http_headers, \
@@ -12,6 +14,9 @@ data_messages = [
     b'Name: user<br>Message: hi!',
     b'Name: user<br>Message: hi!',
 ]
+
+router = Router()
+router.add_route('/', index)
 
 
 @wsgiref.validate.validator
@@ -27,13 +32,10 @@ def application(environ, start_response):
     POST = parse_http_x_www_form_urlencoded_post_data(environ)
     GET = parse_http_get_data(environ)
 
-    status = '200 OK'
     headers = [('Content-type', 'text/html; charset=utf-8')]
 
-    if URI_PATH == '/favicon.ico':
-        status = '404 Not Found'
-        start_response(status, headers)
-        return [b'']
+    controller_callback = router.resolve(URI_PATH)
+    status, body = controller_callback(REQUEST_METHOD, GET, POST, headers)
 
     if URI_PATH.startswith(STATIC_URL):
         print('STATIC FILE DETECTED!')
@@ -46,22 +48,5 @@ def application(environ, start_response):
               ":HEADERS:\n{HEADERS}\n"
               .format(**locals()))
 
-    with open('main.html', 'rb') as f:
-        template_bytes = f.read()
-
-    if REQUEST_METHOD == 'POST':
-        status = '303 See Other'
-        headers.append(('Location', '/'))
-        name = get_first_element(POST, 'name', '')
-        message = get_first_element(POST, 'message', '')
-        data_message_text = "Name: {0}<br>Message: {1}".format(name, message)
-        data_message_bytes = data_message_text.encode('utf-8')
-        data_messages.append(data_message_bytes)
-        start_response(status, headers)
-        return [b'']
-
-    messages = b'<hr>'.join(data_messages)
-    template_bytes = template_bytes.replace(b'{{messages}}', messages)
-
     start_response(status, headers)
-    return [template_bytes]
+    return [body]

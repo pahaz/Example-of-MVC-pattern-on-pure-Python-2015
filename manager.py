@@ -40,3 +40,6 @@ class Manager:
 
     def filter_by_name(self, name):
         return [m for m in self.all() if m.name == name]
+
+    def close(self):
+        self._db.close()
