@@ -13,7 +13,15 @@ class View:
     def render(self, **context):
         rendered = self._template
         for k, v in context.items():
+            k = '{{' + k + '}}'
             if isinstance(v, str):
                 v = v.encode()
             rendered = rendered.replace(k.encode(), v)
         return rendered
+
+
+if __name__ == "__main__":
+    view = View('main.html')
+    assert isinstance(view._template, bytes)
+    assert isinstance(view.render(), bytes)
+    assert b'qwer' in view.render(messages="qwer"), "Problem in replace"

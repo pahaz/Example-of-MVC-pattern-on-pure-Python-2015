@@ -10,11 +10,6 @@ DEBUG = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'data'
 
-data_messages = [
-    b'Name: user<br>Message: hi!',
-    b'Name: user<br>Message: hi!',
-]
-
 router = Router()
 router.add_route('/', index)
 

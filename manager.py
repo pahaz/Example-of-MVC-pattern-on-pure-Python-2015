@@ -13,8 +13,9 @@ class Manager:
         messagers = []
         for id, data in self._db.items():
             m = Message(data['name'], data['message'])
-            m.id = id
+            m.id = str(id)
             messagers.append(m)
+        messagers.sort(key=lambda x: x.id)
         return messagers
 
     def save(self, message):
@@ -26,8 +27,11 @@ class Manager:
         if message.id:
             self._db[message.id] = data
         else:
-            max_id = max(self._db.keys())
-            self._db[max_id + 1] = data
+            try:
+                max_id = max(map(int, self._db.keys()))
+            except ValueError:
+                max_id = 1
+            self._db[str(max_id + 1)] = data
 
         self._db.sync()
 
