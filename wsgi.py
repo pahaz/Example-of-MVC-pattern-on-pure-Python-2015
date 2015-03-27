@@ -12,7 +12,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'data'
 
 router = Router()
-router.add_route('/', index)
+router.register_controller('/', index)
 
 
 @wsgiref.validate.validator
