@@ -1,5 +1,3 @@
-import wsgiref.validate
-
 from conteroller import index
 from router import Router
 from utils import parse_http_x_www_form_urlencoded_post_data, \
@@ -15,7 +13,6 @@ router = Router()
 router.register_controller('/', index)
 
 
-@wsgiref.validate.validator
 def application(environ, start_response):
     # https://www.python.org/dev/peps/pep-3333/#environ-variables
     REQUEST_METHOD = environ['REQUEST_METHOD']
@@ -23,7 +20,6 @@ def application(environ, start_response):
     SERVER_PROTOCOL = environ['SERVER_PROTOCOL']
     HEADERS = parse_http_headers(environ)
     URI_PATH = environ['PATH_INFO']
-    URI_QUERY = environ['QUERY_STRING']
     URI = parse_http_uri(environ)
     POST = parse_http_x_www_form_urlencoded_post_data(environ)
     GET = parse_http_get_data(environ)
@@ -37,7 +33,7 @@ def application(environ, start_response):
         print('STATIC FILE DETECTED!')
 
     if DEBUG:
-        print("{REQUEST_METHOD} {URI_PATH}?{URI_QUERY} {SERVER_PROTOCOL}\n"
+        print("{REQUEST_METHOD} {URI_PATH} {SERVER_PROTOCOL}\n"
               "CONTENT_TYPE: {CONTENT_TYPE}; {CONTENT_TYPE_KWARGS}\n"
               "POST: {POST}\n"
               "GET: {GET}\n"
