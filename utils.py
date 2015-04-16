@@ -5,6 +5,13 @@ from wsgiref.headers import Headers
 from wsgiref.util import request_uri
 
 
+# ===========================
+#
+#        Utilities
+#
+# ===========================
+
+
 def parse_http_get_data(environ):
     qs = environ.get("QUERY_STRING", "")
     if isinstance(qs, bytes):

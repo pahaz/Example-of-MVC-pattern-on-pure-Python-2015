@@ -7,7 +7,14 @@ from model import Message
 __author__ = 'pahaz'
 
 
-class Manager:
+# ===========================
+#
+#  [Mvc] 1.1 Model Manager
+#
+# ===========================
+
+
+class MessageManager:
     def __init__(self, db_name):
         self._db = shelve.open(db_name)
 

@@ -5,7 +5,14 @@ from utils import parse_http_x_www_form_urlencoded_post_data, \
     parse_http_content_type, parse_http_uri
 
 
-DEBUG = True
+# ===========================
+#
+#    0.0 WSGI application
+#
+# ===========================
+
+
+DEBUG = False
 STATIC_URL = '/static/'
 STATIC_ROOT = 'data'
 
